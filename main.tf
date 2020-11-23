@@ -1,7 +1,4 @@
-provider "aws" {
-  version = "~> 2.43"
-  region  = "eu-west-1"
-}
+provider "aws" {}
 
 terraform {
   backend "remote" {
@@ -18,7 +15,6 @@ data aws_iam_policy_document "state_bucket" {
     sid       = "EnsureHTTPS"
     effect    = "Deny"
     resources = ["${aws_s3_bucket.state_bucket.arn}/*"]
-
     actions   = ["*"]
 
     principals {
