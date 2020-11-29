@@ -38,6 +38,10 @@ resource "aws_s3_bucket" "state_bucket" {
   bucket = "jonbamber-tf-state"
   acl    = "private"
 
+  versioning {
+    enabled = true
+  }
+
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
