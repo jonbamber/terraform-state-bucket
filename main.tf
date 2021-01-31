@@ -30,10 +30,6 @@ data aws_iam_policy_document "state_bucket" {
   }
 }
 
-resource "aws_kms_key" "state_bucket" {
-  description = "KMS key for encryption on the Terraform state file bucket"
-}
-
 resource "aws_s3_bucket" "state_bucket" {
   bucket = "jonbamber-tf-state"
   acl    = "private"
@@ -45,8 +41,7 @@ resource "aws_s3_bucket" "state_bucket" {
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
-        kms_master_key_id = aws_kms_key.state_bucket.arn
-        sse_algorithm     = "aws:kms"
+        sse_algorithm = "aws:kms"
       }
     }
   }
